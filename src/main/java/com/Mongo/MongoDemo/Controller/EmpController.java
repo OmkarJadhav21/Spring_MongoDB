@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class EmpController {
@@ -15,6 +16,12 @@ public class EmpController {
 
     @PostMapping(value = "/insertEmp")
     String insertEmp(@RequestBody Employee employee){
+        empRepo.save(employee);
+        return "Data saved";
+      }
+
+    @PostMapping(value = "/insertEmpupdate")
+    String insertEmpupdate(@RequestBody Employee employee){
         Integer empId=employee.getId();
         Employee empInfo=empRepo.findOne(empId);
 //        Integer id=empInfo.getId();
@@ -32,7 +39,7 @@ public class EmpController {
     }
 
     @GetMapping(value = "/getAllEmp")
-    List<Employee>getAllEmp(@PathVariable String addr){
+    List<Employee>getAllEmp(){
         List<Employee>employeeList=empRepo.findAll();
         return employeeList;
     }
@@ -51,10 +58,27 @@ public class EmpController {
         return "Employee name Updated";
     }
 
+    @GetMapping(value = "/DeleteAllMongo")
+    String DeleteAllMongo(){
+        empRepo.deleteAll();
+        return "All Data Deleted in mongo";
+    }
+    @GetMapping(value = "/DeleteOneMongo")
+    String DeleteOneMongo(@RequestParam Integer id ){
+        empRepo.delete(id);
+        return "Data Deleted for Given ID";
+    }
+
     @GetMapping(value = "/findAddrByPin")
     Employee findAddrByPin(@RequestParam Integer Pin){
         Employee raw=empRepo.findByPin(Pin);
         return raw;
+    }
+
+    @GetMapping(value = "/findAddrBycity")
+    Employee findAddrBycity(@RequestParam String city){
+        Employee emp=empRepo.findByCity(city);
+        return emp;
     }
 
 
