@@ -15,10 +15,6 @@ public class EmpController {
 
     @PostMapping(value = "/insertEmp")
     String insertEmp(@RequestBody Employee employee){
-
-
-
-
         Integer empId=employee.getId();
         Employee empInfo=empRepo.findOne(empId);
 //        Integer id=empInfo.getId();
@@ -37,12 +33,7 @@ public class EmpController {
 
     @GetMapping(value = "/getAllEmp")
     List<Employee>getAllEmp(@PathVariable String addr){
-
-
         List<Employee>employeeList=empRepo.findAll();
-
-
-
         return employeeList;
     }
 
@@ -52,6 +43,13 @@ public class EmpController {
       return empOne;
     }
 
+    @PostMapping(value = "updtIdByparamAndBody")
+    String updtIdbyparamAndBody(@RequestParam Integer id,@RequestBody Employee empl){
+        Employee empInfo=empRepo.findOne(id);
+        empInfo.setEmpName(empl.getEmpName());
+        empRepo.save(empInfo);
+        return "Employee name Updated ";
+    }
 
 
 }

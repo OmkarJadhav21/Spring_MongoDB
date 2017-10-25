@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface EmpRepo extends MongoRepository<Employee,Integer> {
-    List<Employee>findByAddress(Address address);
+//    List<Employee>findByAddress(Address address);
 }
