@@ -51,5 +51,11 @@ public class EmpController {
         return "Employee name Updated";
     }
 
+    @GetMapping(value = "/findAddrByPin")
+    Employee findAddrByPin(@RequestParam Integer Pin){
+        Employee raw=empRepo.findByPin(Pin);
+        return raw;
+    }
+
 
 }
