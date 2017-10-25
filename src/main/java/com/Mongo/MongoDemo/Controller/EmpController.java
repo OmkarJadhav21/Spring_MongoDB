@@ -48,7 +48,7 @@ public class EmpController {
         Employee empInfo=empRepo.findOne(id);
         empInfo.setEmpName(empl.getEmpName());
         empRepo.save(empInfo);
-        return "Employee name Updated ";
+        return "Employee name Updated";
     }
 
 
