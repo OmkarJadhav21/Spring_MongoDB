@@ -1,6 +1,7 @@
 package com.Mongo.MongoDemo.Model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.util.List;
 
@@ -11,6 +12,18 @@ public class Student {
     String studName;
     String studCity;
     List<String>subjects;           //send data into this format {...subj:["math",phy,bio]}
+
+    @DBRef      //Reference of this field is strored using id
+    Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -18,8 +31,10 @@ public class Student {
                 ", studName='" + studName + '\'' +
                 ", studCity='" + studCity + '\'' +
                 ", subjects=" + subjects +
+                ", department=" + department +
                 '}';
     }
+
 
 
     public List<String> getSubjects() {

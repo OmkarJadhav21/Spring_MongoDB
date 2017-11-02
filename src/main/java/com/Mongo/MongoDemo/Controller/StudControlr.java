@@ -39,10 +39,15 @@ public class StudControlr {
  }
 
  @GetMapping(value = "/deleteAll")
-    String deleteAll(){
+     String deleteAll(){
      studRepo.deleteAll();
      return "All Data Deleted";
  }
 
+ @PostMapping(value = "/useDbRef")
+    String useDbRef(@RequestBody Student student){
+    studRepo.save(student);
+    return "values inserted only when dept id is first present in dept";
+}
 
 }
